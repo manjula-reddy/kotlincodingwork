@@ -1,0 +1,38 @@
+/**
+ * Line 2 demonstrates the for-loop, that would have been called "enhanced"
+ * if there were any other for-loop in Kotlin.
+ * See http://kotlinlang.org/docs/reference/basic-syntax.html#using-a-for-loop
+ */
+
+fun main(args: Array<String>) {
+    val apple = "apple"
+    val orange = "orange"
+    var appleCount = 0
+    var orangeCount = 0
+    if (args.size == 0) {
+        println("Please provide order details.")
+        return
+    }
+    for (fruits in args){
+       if(fruits.equals(apple,true)){
+       appleCount++
+       }else if(fruits.equals(orange,true)){
+       orangeCount++
+       }else{
+        println("Please enter valid details.")
+           break;
+       }
+    }
+    println("-------- Your Order ---------")
+     println("Apples : ${appleCount}")
+     println("Oranges : ${orangeCount}")
+    
+     println("Total bill is : ${getTotalBill(appleCount,orangeCount)}")
+    println("--------- Thanks ------------")
+   
+    
+}
+fun getTotalBill(appleCount: Int,orangeCount: Int): String {
+    return "$"+(((appleCount * 60) +(orangeCount * 25)).toDouble()/100)
+}
+

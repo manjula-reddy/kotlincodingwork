@@ -1,0 +1,69 @@
+/**
+ * Line 2 demonstrates the for-loop, that would have been called "enhanced"
+ * if there were any other for-loop in Kotlin.
+ * See http://kotlinlang.org/docs/reference/basic-syntax.html#using-a-for-loop
+ */
+
+fun main(args: Array<String>) {
+    val apple = "apple"
+    val orange = "orange"
+    var appleCount = 0
+    var orangeCount = 0
+    var stockOfApple = 2
+    var stockOfOrange = 1
+    if (args.size == 0) {
+        println("Please provide order details.")
+        return
+    }
+    for (fruits in args){
+       if(fruits.equals(apple,true)){
+       appleCount++
+       }else if(fruits.equals(orange,true)){
+       orangeCount++
+       }else{
+        println("Please enter valid details.")
+           break;
+       }
+    }
+    // check stocks
+	 // todo do get stock data
+    if(appleCount >stockOfApple || orangeCount>stockOfOrange){
+	 // todo send appropriate mail or message
+    println("-----Sorry ,  OUT OF STOCK -------")
+        return
+    }
+    
+    println("-------- Offer ---------")
+    println("1) Buy one get one on Apple")
+    println("2) Get 3 Orange price of 2")
+    println("-------- Your Order ---------")
+     println("Apples : ${appleCount*2}")
+     println("Oranges : ${orangeCount}")
+    println("Total bill is : ${getTotalBill(appleCount,orangeCount)}")
+    if((appleCount+orangeCount)>0){
+        // todo do Api calls and get ETA time
+    println("~~~> Order placed Sussessfully < ~~~")
+    println("~~~> ETA : 20 mins < ~~~")
+    }
+    println("--------- Thanks ------------")
+   
+    
+}
+fun getTotalBill(appleCount: Int,orangeCount : Int): String {
+    return "$"+(((appleCount * 60) +(getOrangePrice(orangeCount))).toDouble()/100)
+}
+fun getOrangePrice(orangeCount: Int): Int {
+    val divisor = 3
+    var price = 0
+    val quotient = orangeCount / divisor
+    val remainder = orangeCount % divisor
+    if(remainder==0){
+    price = (orangeCount-quotient)*25
+    }else{
+    // if user not buying as per offer
+    // like 4 orange then price will be of 3 (offer + 1)
+    price = (remainder*25)+(quotient*2*25)
+    }
+    return price;
+}
+
